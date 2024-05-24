@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { createItem, getItems } from "./app/peolple"
 import { useState } from "react"
+import Tr from "./components/Tr"
 
 
 const App = () => {
@@ -13,6 +14,8 @@ const App = () => {
 
   }
 
+
+
   const pintar = () => { getItems().then(setBooks) };
   useEffect(() => {
 
@@ -22,7 +25,7 @@ const App = () => {
 
   return (
     <div>
-      <table className="table-fixed">
+      <table className="table-fixed text-center">
         <tr>
           <td ><th>Id</th></td>
           <td><th >Title</th></td>
@@ -30,14 +33,9 @@ const App = () => {
           <td><th>Option</th></td>
         </tr>
 
-        {books.map(book => <tr key={book.id}> <td className="text-xs">{book.id}</td> <td>{book.title}</td> <td>{book.price}</td>
-          <td>
-
-            <button className="border-4">delete</button>-
-            <button className="border-4">upldate</button>
-
-          </td>
-        </tr>)}
+        {
+          books.map(book => <Tr key={book.id} book={book} pintar={pintar} />)
+        }
 
         <tr>
           <td></td>
@@ -50,5 +48,6 @@ const App = () => {
     </div >
   )
 }
+
 
 export default App
